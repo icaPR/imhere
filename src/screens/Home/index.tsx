@@ -1,8 +1,35 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import { styles } from "./styles";
 import { Participant } from "../../components/Participant";
 
 export default function Home() {
+  const participants = [
+    "joao",
+    "paulo",
+    "noe",
+    "lucas",
+    "junior",
+    "joao1",
+    "paulo1",
+    "noe1",
+    "lucas1",
+    "junior1",
+    "noe11",
+    "lucas11",
+    "junior11",
+    "joao11",
+    "paulo11",
+    "noe111",
+    "lucas111",
+    "junior",
+  ];
+  //const [participant, setParticipant] = useState([]);
   function handleParticipantAdd() {
     console.log("Add");
   }
@@ -23,9 +50,18 @@ export default function Home() {
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
       </View>
-      <Participant name="José" onRemove={handleParticipantRemove} />
-      <Participant name="Carlos" onRemove={handleParticipantRemove} />
-      <Participant name="Oliver" onRemove={handleParticipantRemove} />
+      <FlatList
+        data={participants}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => (
+          <Participant
+            key={item}
+            name={item}
+            onRemove={handleParticipantRemove}
+          />
+        )}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 }
