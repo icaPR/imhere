@@ -28,8 +28,23 @@ export default function Home() {
       setText("");
     }
   }
-  function handleParticipantRemove() {
-    console.log("Remove");
+  function handleParticipantRemove(name: string) {
+    function remove(name: string) {
+      Alert.alert("Removido", "Participante Removido");
+      const newParticipants = participants.filter(
+        (participant) => participant !== name
+      );
+      setParticipants(newParticipants);
+    }
+    Alert.alert("Remover", `Deseja remover o participante ${name}`, [
+      {
+        text: "Sim",
+        onPress: () => remove(name),
+      },
+      {
+        text: "Não",
+      },
+    ]);
   }
 
   return (
@@ -57,7 +72,7 @@ export default function Home() {
           <Participant
             key={item}
             name={item}
-            onRemove={handleParticipantRemove}
+            onRemove={() => handleParticipantRemove(item)}
           />
         )}
         showsVerticalScrollIndicator={false}
